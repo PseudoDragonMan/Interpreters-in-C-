@@ -1,0 +1,1222 @@
+Terminals unused in grammar
+
+    FUNC
+
+
+State 62 conflicts: 12 shift/reduce
+State 63 conflicts: 12 shift/reduce
+State 66 conflicts: 12 shift/reduce
+
+
+Grammar
+
+    0 $accept: program $end
+
+    1 program: stmts
+
+    2 stmts: stmts stmt
+    3      | stmt
+
+    4 stmt: block
+    5     | LET NAME '=' expression ';'
+    6     | expression ';'
+    7     | FOR '(' expression ')' stmts
+    8     | WHILE '(' expression ')' stmts
+    9     | IF '(' expression ')' stmts ELSE stmts
+
+   10 $@1: ε
+
+   11 block: '{' $@1 stmts '}'
+
+   12 expressions: expressions ',' expression
+   13            | expression
+
+   14 expression: '(' expression ')'
+   15           | '[' expressions ']'
+   16           | expression '/' expression
+   17           | expression '*' expression
+   18           | expression '+' expression
+   19           | expression '-' expression
+   20           | expression '<' expression
+   21           | expression '>' expression
+   22           | expression "==" expression
+   23           | expression NOT_EQUAL expression
+   24           | NOT expression
+   25           | '-' expression
+   26           | INT_CONST
+   27           | FLT_CONST
+   28           | NAME
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    '(' <name> (40) 7 8 9 14
+    ')' <name> (41) 7 8 9 14
+    '*' (42) 17
+    '+' (43) 18
+    ',' (44) 12
+    '-' (45) 19 25
+    '/' (47) 16
+    ';' (59) 5 6
+    '<' (60) 20
+    '=' (61) 5
+    '>' (62) 21
+    '[' <name> (91) 15
+    ']' <name> (93) 15
+    '{' <name> (123) 11
+    '}' <name> (125) 11
+    error (256)
+    INT_CONST <name> (258) 26
+    FLT_CONST <name> (259) 27
+    NAME <name> (260) 5 28
+    LET <name> (261) 5
+    FOR (262) 7
+    WHILE (263) 8
+    IF (264) 9
+    ELSE (265) 9
+    FUNC (266)
+    NOT (267) 24
+    Uminus (268)
+    "==" (269) 22
+    NOT_EQUAL (270) 23
+
+
+Nonterminals, with rules where they appear
+
+    $accept (31)
+        on left: 0
+    program (32)
+        on left: 1
+        on right: 0
+    stmts <stmt_wrap> (33)
+        on left: 2 3
+        on right: 1 2 7 8 9 11
+    stmt <tree> (34)
+        on left: 4 5 6 7 8 9
+        on right: 2 3
+    block (35)
+        on left: 11
+        on right: 4
+    $@1 (36)
+        on left: 10
+        on right: 11
+    expressions <wrap_exp> (37)
+        on left: 12 13
+        on right: 12 15
+    expression <exp> (38)
+        on left: 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28
+        on right: 5 6 7 8 9 12 13 14 16 17 18 19 20 21 22 23 24 25
+
+
+State 0
+
+    0 $accept: • program $end
+
+    INT_CONST  shift, and go to state 1
+    FLT_CONST  shift, and go to state 2
+    NAME       shift, and go to state 3
+    LET        shift, and go to state 4
+    FOR        shift, and go to state 5
+    WHILE      shift, and go to state 6
+    IF         shift, and go to state 7
+    NOT        shift, and go to state 8
+    '-'        shift, and go to state 9
+    '('        shift, and go to state 10
+    '{'        shift, and go to state 11
+    '['        shift, and go to state 12
+
+    program     go to state 13
+    stmts       go to state 14
+    stmt        go to state 15
+    block       go to state 16
+    expression  go to state 17
+
+
+State 1
+
+   26 expression: INT_CONST •
+
+    $default  reduce using rule 26 (expression)
+
+
+State 2
+
+   27 expression: FLT_CONST •
+
+    $default  reduce using rule 27 (expression)
+
+
+State 3
+
+   28 expression: NAME •
+
+    $default  reduce using rule 28 (expression)
+
+
+State 4
+
+    5 stmt: LET • NAME '=' expression ';'
+
+    NAME  shift, and go to state 18
+
+
+State 5
+
+    7 stmt: FOR • '(' expression ')' stmts
+
+    '('  shift, and go to state 19
+
+
+State 6
+
+    8 stmt: WHILE • '(' expression ')' stmts
+
+    '('  shift, and go to state 20
+
+
+State 7
+
+    9 stmt: IF • '(' expression ')' stmts ELSE stmts
+
+    '('  shift, and go to state 21
+
+
+State 8
+
+   24 expression: NOT • expression
+
+    INT_CONST  shift, and go to state 1
+    FLT_CONST  shift, and go to state 2
+    NAME       shift, and go to state 3
+    NOT        shift, and go to state 8
+    '-'        shift, and go to state 9
+    '('        shift, and go to state 10
+    '['        shift, and go to state 12
+
+    expression  go to state 22
+
+
+State 9
+
+   25 expression: '-' • expression
+
+    INT_CONST  shift, and go to state 1
+    FLT_CONST  shift, and go to state 2
+    NAME       shift, and go to state 3
+    NOT        shift, and go to state 8
+    '-'        shift, and go to state 9
+    '('        shift, and go to state 10
+    '['        shift, and go to state 12
+
+    expression  go to state 23
+
+
+State 10
+
+   14 expression: '(' • expression ')'
+
+    INT_CONST  shift, and go to state 1
+    FLT_CONST  shift, and go to state 2
+    NAME       shift, and go to state 3
+    NOT        shift, and go to state 8
+    '-'        shift, and go to state 9
+    '('        shift, and go to state 10
+    '['        shift, and go to state 12
+
+    expression  go to state 24
+
+
+State 11
+
+   11 block: '{' • $@1 stmts '}'
+
+    $default  reduce using rule 10 ($@1)
+
+    $@1  go to state 25
+
+
+State 12
+
+   15 expression: '[' • expressions ']'
+
+    INT_CONST  shift, and go to state 1
+    FLT_CONST  shift, and go to state 2
+    NAME       shift, and go to state 3
+    NOT        shift, and go to state 8
+    '-'        shift, and go to state 9
+    '('        shift, and go to state 10
+    '['        shift, and go to state 12
+
+    expressions  go to state 26
+    expression   go to state 27
+
+
+State 13
+
+    0 $accept: program • $end
+
+    $end  shift, and go to state 28
+
+
+State 14
+
+    1 program: stmts •
+    2 stmts: stmts • stmt
+
+    INT_CONST  shift, and go to state 1
+    FLT_CONST  shift, and go to state 2
+    NAME       shift, and go to state 3
+    LET        shift, and go to state 4
+    FOR        shift, and go to state 5
+    WHILE      shift, and go to state 6
+    IF         shift, and go to state 7
+    NOT        shift, and go to state 8
+    '-'        shift, and go to state 9
+    '('        shift, and go to state 10
+    '{'        shift, and go to state 11
+    '['        shift, and go to state 12
+
+    $default  reduce using rule 1 (program)
+
+    stmt        go to state 29
+    block       go to state 16
+    expression  go to state 17
+
+
+State 15
+
+    3 stmts: stmt •
+
+    $default  reduce using rule 3 (stmts)
+
+
+State 16
+
+    4 stmt: block •
+
+    $default  reduce using rule 4 (stmt)
+
+
+State 17
+
+    6 stmt: expression • ';'
+   16 expression: expression • '/' expression
+   17           | expression • '*' expression
+   18           | expression • '+' expression
+   19           | expression • '-' expression
+   20           | expression • '<' expression
+   21           | expression • '>' expression
+   22           | expression • "==" expression
+   23           | expression • NOT_EQUAL expression
+
+    '+'        shift, and go to state 30
+    '-'        shift, and go to state 31
+    '*'        shift, and go to state 32
+    '/'        shift, and go to state 33
+    '<'        shift, and go to state 34
+    '>'        shift, and go to state 35
+    "=="       shift, and go to state 36
+    NOT_EQUAL  shift, and go to state 37
+    ';'        shift, and go to state 38
+
+
+State 18
+
+    5 stmt: LET NAME • '=' expression ';'
+
+    '='  shift, and go to state 39
+
+
+State 19
+
+    7 stmt: FOR '(' • expression ')' stmts
+
+    INT_CONST  shift, and go to state 1
+    FLT_CONST  shift, and go to state 2
+    NAME       shift, and go to state 3
+    NOT        shift, and go to state 8
+    '-'        shift, and go to state 9
+    '('        shift, and go to state 10
+    '['        shift, and go to state 12
+
+    expression  go to state 40
+
+
+State 20
+
+    8 stmt: WHILE '(' • expression ')' stmts
+
+    INT_CONST  shift, and go to state 1
+    FLT_CONST  shift, and go to state 2
+    NAME       shift, and go to state 3
+    NOT        shift, and go to state 8
+    '-'        shift, and go to state 9
+    '('        shift, and go to state 10
+    '['        shift, and go to state 12
+
+    expression  go to state 41
+
+
+State 21
+
+    9 stmt: IF '(' • expression ')' stmts ELSE stmts
+
+    INT_CONST  shift, and go to state 1
+    FLT_CONST  shift, and go to state 2
+    NAME       shift, and go to state 3
+    NOT        shift, and go to state 8
+    '-'        shift, and go to state 9
+    '('        shift, and go to state 10
+    '['        shift, and go to state 12
+
+    expression  go to state 42
+
+
+State 22
+
+   16 expression: expression • '/' expression
+   17           | expression • '*' expression
+   18           | expression • '+' expression
+   19           | expression • '-' expression
+   20           | expression • '<' expression
+   21           | expression • '>' expression
+   22           | expression • "==" expression
+   23           | expression • NOT_EQUAL expression
+   24           | NOT expression •
+
+    '<'        shift, and go to state 34
+    '>'        shift, and go to state 35
+    "=="       shift, and go to state 36
+    NOT_EQUAL  shift, and go to state 37
+
+    $default  reduce using rule 24 (expression)
+
+
+State 23
+
+   16 expression: expression • '/' expression
+   17           | expression • '*' expression
+   18           | expression • '+' expression
+   19           | expression • '-' expression
+   20           | expression • '<' expression
+   21           | expression • '>' expression
+   22           | expression • "==" expression
+   23           | expression • NOT_EQUAL expression
+   25           | '-' expression •
+
+    '<'        shift, and go to state 34
+    '>'        shift, and go to state 35
+    "=="       shift, and go to state 36
+    NOT_EQUAL  shift, and go to state 37
+
+    $default  reduce using rule 25 (expression)
+
+
+State 24
+
+   14 expression: '(' expression • ')'
+   16           | expression • '/' expression
+   17           | expression • '*' expression
+   18           | expression • '+' expression
+   19           | expression • '-' expression
+   20           | expression • '<' expression
+   21           | expression • '>' expression
+   22           | expression • "==" expression
+   23           | expression • NOT_EQUAL expression
+
+    '+'        shift, and go to state 30
+    '-'        shift, and go to state 31
+    '*'        shift, and go to state 32
+    '/'        shift, and go to state 33
+    '<'        shift, and go to state 34
+    '>'        shift, and go to state 35
+    "=="       shift, and go to state 36
+    NOT_EQUAL  shift, and go to state 37
+    ')'        shift, and go to state 43
+
+
+State 25
+
+   11 block: '{' $@1 • stmts '}'
+
+    INT_CONST  shift, and go to state 1
+    FLT_CONST  shift, and go to state 2
+    NAME       shift, and go to state 3
+    LET        shift, and go to state 4
+    FOR        shift, and go to state 5
+    WHILE      shift, and go to state 6
+    IF         shift, and go to state 7
+    NOT        shift, and go to state 8
+    '-'        shift, and go to state 9
+    '('        shift, and go to state 10
+    '{'        shift, and go to state 11
+    '['        shift, and go to state 12
+
+    stmts       go to state 44
+    stmt        go to state 15
+    block       go to state 16
+    expression  go to state 17
+
+
+State 26
+
+   12 expressions: expressions • ',' expression
+   15 expression: '[' expressions • ']'
+
+    ']'  shift, and go to state 45
+    ','  shift, and go to state 46
+
+
+State 27
+
+   13 expressions: expression •
+   16 expression: expression • '/' expression
+   17           | expression • '*' expression
+   18           | expression • '+' expression
+   19           | expression • '-' expression
+   20           | expression • '<' expression
+   21           | expression • '>' expression
+   22           | expression • "==" expression
+   23           | expression • NOT_EQUAL expression
+
+    '+'        shift, and go to state 30
+    '-'        shift, and go to state 31
+    '*'        shift, and go to state 32
+    '/'        shift, and go to state 33
+    '<'        shift, and go to state 34
+    '>'        shift, and go to state 35
+    "=="       shift, and go to state 36
+    NOT_EQUAL  shift, and go to state 37
+
+    $default  reduce using rule 13 (expressions)
+
+
+State 28
+
+    0 $accept: program $end •
+
+    $default  accept
+
+
+State 29
+
+    2 stmts: stmts stmt •
+
+    $default  reduce using rule 2 (stmts)
+
+
+State 30
+
+   18 expression: expression '+' • expression
+
+    INT_CONST  shift, and go to state 1
+    FLT_CONST  shift, and go to state 2
+    NAME       shift, and go to state 3
+    NOT        shift, and go to state 8
+    '-'        shift, and go to state 9
+    '('        shift, and go to state 10
+    '['        shift, and go to state 12
+
+    expression  go to state 47
+
+
+State 31
+
+   19 expression: expression '-' • expression
+
+    INT_CONST  shift, and go to state 1
+    FLT_CONST  shift, and go to state 2
+    NAME       shift, and go to state 3
+    NOT        shift, and go to state 8
+    '-'        shift, and go to state 9
+    '('        shift, and go to state 10
+    '['        shift, and go to state 12
+
+    expression  go to state 48
+
+
+State 32
+
+   17 expression: expression '*' • expression
+
+    INT_CONST  shift, and go to state 1
+    FLT_CONST  shift, and go to state 2
+    NAME       shift, and go to state 3
+    NOT        shift, and go to state 8
+    '-'        shift, and go to state 9
+    '('        shift, and go to state 10
+    '['        shift, and go to state 12
+
+    expression  go to state 49
+
+
+State 33
+
+   16 expression: expression '/' • expression
+
+    INT_CONST  shift, and go to state 1
+    FLT_CONST  shift, and go to state 2
+    NAME       shift, and go to state 3
+    NOT        shift, and go to state 8
+    '-'        shift, and go to state 9
+    '('        shift, and go to state 10
+    '['        shift, and go to state 12
+
+    expression  go to state 50
+
+
+State 34
+
+   20 expression: expression '<' • expression
+
+    INT_CONST  shift, and go to state 1
+    FLT_CONST  shift, and go to state 2
+    NAME       shift, and go to state 3
+    NOT        shift, and go to state 8
+    '-'        shift, and go to state 9
+    '('        shift, and go to state 10
+    '['        shift, and go to state 12
+
+    expression  go to state 51
+
+
+State 35
+
+   21 expression: expression '>' • expression
+
+    INT_CONST  shift, and go to state 1
+    FLT_CONST  shift, and go to state 2
+    NAME       shift, and go to state 3
+    NOT        shift, and go to state 8
+    '-'        shift, and go to state 9
+    '('        shift, and go to state 10
+    '['        shift, and go to state 12
+
+    expression  go to state 52
+
+
+State 36
+
+   22 expression: expression "==" • expression
+
+    INT_CONST  shift, and go to state 1
+    FLT_CONST  shift, and go to state 2
+    NAME       shift, and go to state 3
+    NOT        shift, and go to state 8
+    '-'        shift, and go to state 9
+    '('        shift, and go to state 10
+    '['        shift, and go to state 12
+
+    expression  go to state 53
+
+
+State 37
+
+   23 expression: expression NOT_EQUAL • expression
+
+    INT_CONST  shift, and go to state 1
+    FLT_CONST  shift, and go to state 2
+    NAME       shift, and go to state 3
+    NOT        shift, and go to state 8
+    '-'        shift, and go to state 9
+    '('        shift, and go to state 10
+    '['        shift, and go to state 12
+
+    expression  go to state 54
+
+
+State 38
+
+    6 stmt: expression ';' •
+
+    $default  reduce using rule 6 (stmt)
+
+
+State 39
+
+    5 stmt: LET NAME '=' • expression ';'
+
+    INT_CONST  shift, and go to state 1
+    FLT_CONST  shift, and go to state 2
+    NAME       shift, and go to state 3
+    NOT        shift, and go to state 8
+    '-'        shift, and go to state 9
+    '('        shift, and go to state 10
+    '['        shift, and go to state 12
+
+    expression  go to state 55
+
+
+State 40
+
+    7 stmt: FOR '(' expression • ')' stmts
+   16 expression: expression • '/' expression
+   17           | expression • '*' expression
+   18           | expression • '+' expression
+   19           | expression • '-' expression
+   20           | expression • '<' expression
+   21           | expression • '>' expression
+   22           | expression • "==" expression
+   23           | expression • NOT_EQUAL expression
+
+    '+'        shift, and go to state 30
+    '-'        shift, and go to state 31
+    '*'        shift, and go to state 32
+    '/'        shift, and go to state 33
+    '<'        shift, and go to state 34
+    '>'        shift, and go to state 35
+    "=="       shift, and go to state 36
+    NOT_EQUAL  shift, and go to state 37
+    ')'        shift, and go to state 56
+
+
+State 41
+
+    8 stmt: WHILE '(' expression • ')' stmts
+   16 expression: expression • '/' expression
+   17           | expression • '*' expression
+   18           | expression • '+' expression
+   19           | expression • '-' expression
+   20           | expression • '<' expression
+   21           | expression • '>' expression
+   22           | expression • "==" expression
+   23           | expression • NOT_EQUAL expression
+
+    '+'        shift, and go to state 30
+    '-'        shift, and go to state 31
+    '*'        shift, and go to state 32
+    '/'        shift, and go to state 33
+    '<'        shift, and go to state 34
+    '>'        shift, and go to state 35
+    "=="       shift, and go to state 36
+    NOT_EQUAL  shift, and go to state 37
+    ')'        shift, and go to state 57
+
+
+State 42
+
+    9 stmt: IF '(' expression • ')' stmts ELSE stmts
+   16 expression: expression • '/' expression
+   17           | expression • '*' expression
+   18           | expression • '+' expression
+   19           | expression • '-' expression
+   20           | expression • '<' expression
+   21           | expression • '>' expression
+   22           | expression • "==" expression
+   23           | expression • NOT_EQUAL expression
+
+    '+'        shift, and go to state 30
+    '-'        shift, and go to state 31
+    '*'        shift, and go to state 32
+    '/'        shift, and go to state 33
+    '<'        shift, and go to state 34
+    '>'        shift, and go to state 35
+    "=="       shift, and go to state 36
+    NOT_EQUAL  shift, and go to state 37
+    ')'        shift, and go to state 58
+
+
+State 43
+
+   14 expression: '(' expression ')' •
+
+    $default  reduce using rule 14 (expression)
+
+
+State 44
+
+    2 stmts: stmts • stmt
+   11 block: '{' $@1 stmts • '}'
+
+    INT_CONST  shift, and go to state 1
+    FLT_CONST  shift, and go to state 2
+    NAME       shift, and go to state 3
+    LET        shift, and go to state 4
+    FOR        shift, and go to state 5
+    WHILE      shift, and go to state 6
+    IF         shift, and go to state 7
+    NOT        shift, and go to state 8
+    '-'        shift, and go to state 9
+    '('        shift, and go to state 10
+    '{'        shift, and go to state 11
+    '}'        shift, and go to state 59
+    '['        shift, and go to state 12
+
+    stmt        go to state 29
+    block       go to state 16
+    expression  go to state 17
+
+
+State 45
+
+   15 expression: '[' expressions ']' •
+
+    $default  reduce using rule 15 (expression)
+
+
+State 46
+
+   12 expressions: expressions ',' • expression
+
+    INT_CONST  shift, and go to state 1
+    FLT_CONST  shift, and go to state 2
+    NAME       shift, and go to state 3
+    NOT        shift, and go to state 8
+    '-'        shift, and go to state 9
+    '('        shift, and go to state 10
+    '['        shift, and go to state 12
+
+    expression  go to state 60
+
+
+State 47
+
+   16 expression: expression • '/' expression
+   17           | expression • '*' expression
+   18           | expression • '+' expression
+   18           | expression '+' expression •
+   19           | expression • '-' expression
+   20           | expression • '<' expression
+   21           | expression • '>' expression
+   22           | expression • "==" expression
+   23           | expression • NOT_EQUAL expression
+
+    '*'        shift, and go to state 32
+    '/'        shift, and go to state 33
+    '<'        shift, and go to state 34
+    '>'        shift, and go to state 35
+    "=="       shift, and go to state 36
+    NOT_EQUAL  shift, and go to state 37
+
+    $default  reduce using rule 18 (expression)
+
+
+State 48
+
+   16 expression: expression • '/' expression
+   17           | expression • '*' expression
+   18           | expression • '+' expression
+   19           | expression • '-' expression
+   19           | expression '-' expression •
+   20           | expression • '<' expression
+   21           | expression • '>' expression
+   22           | expression • "==" expression
+   23           | expression • NOT_EQUAL expression
+
+    '*'        shift, and go to state 32
+    '/'        shift, and go to state 33
+    '<'        shift, and go to state 34
+    '>'        shift, and go to state 35
+    "=="       shift, and go to state 36
+    NOT_EQUAL  shift, and go to state 37
+
+    $default  reduce using rule 19 (expression)
+
+
+State 49
+
+   16 expression: expression • '/' expression
+   17           | expression • '*' expression
+   17           | expression '*' expression •
+   18           | expression • '+' expression
+   19           | expression • '-' expression
+   20           | expression • '<' expression
+   21           | expression • '>' expression
+   22           | expression • "==" expression
+   23           | expression • NOT_EQUAL expression
+
+    '<'        shift, and go to state 34
+    '>'        shift, and go to state 35
+    "=="       shift, and go to state 36
+    NOT_EQUAL  shift, and go to state 37
+
+    $default  reduce using rule 17 (expression)
+
+
+State 50
+
+   16 expression: expression • '/' expression
+   16           | expression '/' expression •
+   17           | expression • '*' expression
+   18           | expression • '+' expression
+   19           | expression • '-' expression
+   20           | expression • '<' expression
+   21           | expression • '>' expression
+   22           | expression • "==" expression
+   23           | expression • NOT_EQUAL expression
+
+    '<'        shift, and go to state 34
+    '>'        shift, and go to state 35
+    "=="       shift, and go to state 36
+    NOT_EQUAL  shift, and go to state 37
+
+    $default  reduce using rule 16 (expression)
+
+
+State 51
+
+   16 expression: expression • '/' expression
+   17           | expression • '*' expression
+   18           | expression • '+' expression
+   19           | expression • '-' expression
+   20           | expression • '<' expression
+   20           | expression '<' expression •
+   21           | expression • '>' expression
+   22           | expression • "==" expression
+   23           | expression • NOT_EQUAL expression
+
+    '<'        error (nonassociative)
+    '>'        error (nonassociative)
+    "=="       error (nonassociative)
+    NOT_EQUAL  error (nonassociative)
+
+    $default  reduce using rule 20 (expression)
+
+
+State 52
+
+   16 expression: expression • '/' expression
+   17           | expression • '*' expression
+   18           | expression • '+' expression
+   19           | expression • '-' expression
+   20           | expression • '<' expression
+   21           | expression • '>' expression
+   21           | expression '>' expression •
+   22           | expression • "==" expression
+   23           | expression • NOT_EQUAL expression
+
+    '<'        error (nonassociative)
+    '>'        error (nonassociative)
+    "=="       error (nonassociative)
+    NOT_EQUAL  error (nonassociative)
+
+    $default  reduce using rule 21 (expression)
+
+
+State 53
+
+   16 expression: expression • '/' expression
+   17           | expression • '*' expression
+   18           | expression • '+' expression
+   19           | expression • '-' expression
+   20           | expression • '<' expression
+   21           | expression • '>' expression
+   22           | expression • "==" expression
+   22           | expression "==" expression •
+   23           | expression • NOT_EQUAL expression
+
+    '<'        error (nonassociative)
+    '>'        error (nonassociative)
+    "=="       error (nonassociative)
+    NOT_EQUAL  error (nonassociative)
+
+    $default  reduce using rule 22 (expression)
+
+
+State 54
+
+   16 expression: expression • '/' expression
+   17           | expression • '*' expression
+   18           | expression • '+' expression
+   19           | expression • '-' expression
+   20           | expression • '<' expression
+   21           | expression • '>' expression
+   22           | expression • "==" expression
+   23           | expression • NOT_EQUAL expression
+   23           | expression NOT_EQUAL expression •
+
+    '<'        error (nonassociative)
+    '>'        error (nonassociative)
+    "=="       error (nonassociative)
+    NOT_EQUAL  error (nonassociative)
+
+    $default  reduce using rule 23 (expression)
+
+
+State 55
+
+    5 stmt: LET NAME '=' expression • ';'
+   16 expression: expression • '/' expression
+   17           | expression • '*' expression
+   18           | expression • '+' expression
+   19           | expression • '-' expression
+   20           | expression • '<' expression
+   21           | expression • '>' expression
+   22           | expression • "==" expression
+   23           | expression • NOT_EQUAL expression
+
+    '+'        shift, and go to state 30
+    '-'        shift, and go to state 31
+    '*'        shift, and go to state 32
+    '/'        shift, and go to state 33
+    '<'        shift, and go to state 34
+    '>'        shift, and go to state 35
+    "=="       shift, and go to state 36
+    NOT_EQUAL  shift, and go to state 37
+    ';'        shift, and go to state 61
+
+
+State 56
+
+    7 stmt: FOR '(' expression ')' • stmts
+
+    INT_CONST  shift, and go to state 1
+    FLT_CONST  shift, and go to state 2
+    NAME       shift, and go to state 3
+    LET        shift, and go to state 4
+    FOR        shift, and go to state 5
+    WHILE      shift, and go to state 6
+    IF         shift, and go to state 7
+    NOT        shift, and go to state 8
+    '-'        shift, and go to state 9
+    '('        shift, and go to state 10
+    '{'        shift, and go to state 11
+    '['        shift, and go to state 12
+
+    stmts       go to state 62
+    stmt        go to state 15
+    block       go to state 16
+    expression  go to state 17
+
+
+State 57
+
+    8 stmt: WHILE '(' expression ')' • stmts
+
+    INT_CONST  shift, and go to state 1
+    FLT_CONST  shift, and go to state 2
+    NAME       shift, and go to state 3
+    LET        shift, and go to state 4
+    FOR        shift, and go to state 5
+    WHILE      shift, and go to state 6
+    IF         shift, and go to state 7
+    NOT        shift, and go to state 8
+    '-'        shift, and go to state 9
+    '('        shift, and go to state 10
+    '{'        shift, and go to state 11
+    '['        shift, and go to state 12
+
+    stmts       go to state 63
+    stmt        go to state 15
+    block       go to state 16
+    expression  go to state 17
+
+
+State 58
+
+    9 stmt: IF '(' expression ')' • stmts ELSE stmts
+
+    INT_CONST  shift, and go to state 1
+    FLT_CONST  shift, and go to state 2
+    NAME       shift, and go to state 3
+    LET        shift, and go to state 4
+    FOR        shift, and go to state 5
+    WHILE      shift, and go to state 6
+    IF         shift, and go to state 7
+    NOT        shift, and go to state 8
+    '-'        shift, and go to state 9
+    '('        shift, and go to state 10
+    '{'        shift, and go to state 11
+    '['        shift, and go to state 12
+
+    stmts       go to state 64
+    stmt        go to state 15
+    block       go to state 16
+    expression  go to state 17
+
+
+State 59
+
+   11 block: '{' $@1 stmts '}' •
+
+    $default  reduce using rule 11 (block)
+
+
+State 60
+
+   12 expressions: expressions ',' expression •
+   16 expression: expression • '/' expression
+   17           | expression • '*' expression
+   18           | expression • '+' expression
+   19           | expression • '-' expression
+   20           | expression • '<' expression
+   21           | expression • '>' expression
+   22           | expression • "==" expression
+   23           | expression • NOT_EQUAL expression
+
+    '+'        shift, and go to state 30
+    '-'        shift, and go to state 31
+    '*'        shift, and go to state 32
+    '/'        shift, and go to state 33
+    '<'        shift, and go to state 34
+    '>'        shift, and go to state 35
+    "=="       shift, and go to state 36
+    NOT_EQUAL  shift, and go to state 37
+
+    $default  reduce using rule 12 (expressions)
+
+
+State 61
+
+    5 stmt: LET NAME '=' expression ';' •
+
+    $default  reduce using rule 5 (stmt)
+
+
+State 62
+
+    2 stmts: stmts • stmt
+    7 stmt: FOR '(' expression ')' stmts •
+
+    INT_CONST  shift, and go to state 1
+    FLT_CONST  shift, and go to state 2
+    NAME       shift, and go to state 3
+    LET        shift, and go to state 4
+    FOR        shift, and go to state 5
+    WHILE      shift, and go to state 6
+    IF         shift, and go to state 7
+    NOT        shift, and go to state 8
+    '-'        shift, and go to state 9
+    '('        shift, and go to state 10
+    '{'        shift, and go to state 11
+    '['        shift, and go to state 12
+
+    INT_CONST  [reduce using rule 7 (stmt)]
+    FLT_CONST  [reduce using rule 7 (stmt)]
+    NAME       [reduce using rule 7 (stmt)]
+    LET        [reduce using rule 7 (stmt)]
+    FOR        [reduce using rule 7 (stmt)]
+    WHILE      [reduce using rule 7 (stmt)]
+    IF         [reduce using rule 7 (stmt)]
+    NOT        [reduce using rule 7 (stmt)]
+    '-'        [reduce using rule 7 (stmt)]
+    '('        [reduce using rule 7 (stmt)]
+    '{'        [reduce using rule 7 (stmt)]
+    '['        [reduce using rule 7 (stmt)]
+    $default   reduce using rule 7 (stmt)
+
+    stmt        go to state 29
+    block       go to state 16
+    expression  go to state 17
+
+
+State 63
+
+    2 stmts: stmts • stmt
+    8 stmt: WHILE '(' expression ')' stmts •
+
+    INT_CONST  shift, and go to state 1
+    FLT_CONST  shift, and go to state 2
+    NAME       shift, and go to state 3
+    LET        shift, and go to state 4
+    FOR        shift, and go to state 5
+    WHILE      shift, and go to state 6
+    IF         shift, and go to state 7
+    NOT        shift, and go to state 8
+    '-'        shift, and go to state 9
+    '('        shift, and go to state 10
+    '{'        shift, and go to state 11
+    '['        shift, and go to state 12
+
+    INT_CONST  [reduce using rule 8 (stmt)]
+    FLT_CONST  [reduce using rule 8 (stmt)]
+    NAME       [reduce using rule 8 (stmt)]
+    LET        [reduce using rule 8 (stmt)]
+    FOR        [reduce using rule 8 (stmt)]
+    WHILE      [reduce using rule 8 (stmt)]
+    IF         [reduce using rule 8 (stmt)]
+    NOT        [reduce using rule 8 (stmt)]
+    '-'        [reduce using rule 8 (stmt)]
+    '('        [reduce using rule 8 (stmt)]
+    '{'        [reduce using rule 8 (stmt)]
+    '['        [reduce using rule 8 (stmt)]
+    $default   reduce using rule 8 (stmt)
+
+    stmt        go to state 29
+    block       go to state 16
+    expression  go to state 17
+
+
+State 64
+
+    2 stmts: stmts • stmt
+    9 stmt: IF '(' expression ')' stmts • ELSE stmts
+
+    INT_CONST  shift, and go to state 1
+    FLT_CONST  shift, and go to state 2
+    NAME       shift, and go to state 3
+    LET        shift, and go to state 4
+    FOR        shift, and go to state 5
+    WHILE      shift, and go to state 6
+    IF         shift, and go to state 7
+    ELSE       shift, and go to state 65
+    NOT        shift, and go to state 8
+    '-'        shift, and go to state 9
+    '('        shift, and go to state 10
+    '{'        shift, and go to state 11
+    '['        shift, and go to state 12
+
+    stmt        go to state 29
+    block       go to state 16
+    expression  go to state 17
+
+
+State 65
+
+    9 stmt: IF '(' expression ')' stmts ELSE • stmts
+
+    INT_CONST  shift, and go to state 1
+    FLT_CONST  shift, and go to state 2
+    NAME       shift, and go to state 3
+    LET        shift, and go to state 4
+    FOR        shift, and go to state 5
+    WHILE      shift, and go to state 6
+    IF         shift, and go to state 7
+    NOT        shift, and go to state 8
+    '-'        shift, and go to state 9
+    '('        shift, and go to state 10
+    '{'        shift, and go to state 11
+    '['        shift, and go to state 12
+
+    stmts       go to state 66
+    stmt        go to state 15
+    block       go to state 16
+    expression  go to state 17
+
+
+State 66
+
+    2 stmts: stmts • stmt
+    9 stmt: IF '(' expression ')' stmts ELSE stmts •
+
+    INT_CONST  shift, and go to state 1
+    FLT_CONST  shift, and go to state 2
+    NAME       shift, and go to state 3
+    LET        shift, and go to state 4
+    FOR        shift, and go to state 5
+    WHILE      shift, and go to state 6
+    IF         shift, and go to state 7
+    NOT        shift, and go to state 8
+    '-'        shift, and go to state 9
+    '('        shift, and go to state 10
+    '{'        shift, and go to state 11
+    '['        shift, and go to state 12
+
+    INT_CONST  [reduce using rule 9 (stmt)]
+    FLT_CONST  [reduce using rule 9 (stmt)]
+    NAME       [reduce using rule 9 (stmt)]
+    LET        [reduce using rule 9 (stmt)]
+    FOR        [reduce using rule 9 (stmt)]
+    WHILE      [reduce using rule 9 (stmt)]
+    IF         [reduce using rule 9 (stmt)]
+    NOT        [reduce using rule 9 (stmt)]
+    '-'        [reduce using rule 9 (stmt)]
+    '('        [reduce using rule 9 (stmt)]
+    '{'        [reduce using rule 9 (stmt)]
+    '['        [reduce using rule 9 (stmt)]
+    $default   reduce using rule 9 (stmt)
+
+    stmt        go to state 29
+    block       go to state 16
+    expression  go to state 17
